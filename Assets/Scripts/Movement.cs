@@ -14,11 +14,15 @@ public class Movement : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				float verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical"));
+				float verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical")); 
 				float horizontalTranslation = generateMovementTranslation (Input.GetAxis ("Horizontal"));
 
 				//Actually Moves the character by the given translations.
 				transform.Translate (horizontalTranslation, verticalTranslation, 0);
+		}
+
+		void updatePlayerMovement() {
+
 		}
 
 		/**
@@ -27,7 +31,7 @@ public class Movement : MonoBehaviour
 		 * 
 		 * @Return The translation amount to move by.
 		 **/ 
-		float generateMovementTranslation (float translation)
+		private float generateMovementTranslation (float translation)
 		{
 				if (translation != 0) {
 						//If the character is moving in a direction on the given axis

@@ -16,9 +16,17 @@ public class Movement : MonoBehaviour
 		{
 				float verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical"));
 				float horizontalTranslation = generateMovementTranslation (Input.GetAxis ("Horizontal"));
+
+				//Actually Moves the character by the given translations.
 				transform.Translate (horizontalTranslation, verticalTranslation, 0);
 		}
 
+		/**
+		 * Generates a movement translation for an axis based on the number passed (which will be between -1 and 1, as well as
+		 * Delta Time and the speed variable.
+		 * 
+		 * @Return The translation amount to move by.
+		 **/ 
 		float generateMovementTranslation (float translation)
 		{
 				if (translation != 0) {

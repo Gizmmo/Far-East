@@ -14,12 +14,19 @@ public class Movement : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				if (Input.GetAxis ("Vertical") != 0) {
-						float translation = Input.GetAxis ("Vertical") * Time.deltaTime * speed;
-						transform.Translate (0, translation, 0);
-				} else if (Input.GetAxis ("Horizontal") != 0) {
-						float translation = Input.GetAxis ("Horizontal") * Time.deltaTime * speed;
-						transform.Translate (translation, 0, 0);
+				float verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical"));
+				float horizontalTranslation = generateMovementTranslation (Input.GetAxis ("Horizontal"));
+				transform.Translate (horizontalTranslation, verticalTranslation, 0);
+		}
+
+		float generateMovementTranslation (float translation)
+		{
+				if (translation != 0) {
+						//If the character is moving in a direction on the given axis
+						return translation * Time.deltaTime * speed;
+				} else {
+						//If the character is not moving in any direction on the given axis
+						return 0;
 				}
 		}
 }

@@ -14,15 +14,31 @@ public class Movement : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				float verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical")); 
-				float horizontalTranslation = generateMovementTranslation (Input.GetAxis ("Horizontal"));
-
-				//Actually Moves the character by the given translations.
-				transform.Translate (horizontalTranslation, verticalTranslation, 0);
+				updatePlayerMovement (); //Used to control the players movement through key presses
 		}
 
-		void updatePlayerMovement() {
+		/**
+		 * Updates the players current position through a translate by checking the current axis values of both the
+		 * Horizontal Axis as well as the vertical axis.  If both are being used, it cuts the movement speed to prevent
+		 * the user from cheating walking speeds
+		 **/
+		void updatePlayerMovement ()
+		{
+				float verticalTranslation;  //Used to keep track of the players current vertical movement
+				float horizontalTranslation; //Used to keep track of the players current horizontal movement
 
+
+				verticalTranslation = generateMovementTranslation (Input.GetAxis ("Vertical")); 
+				horizontalTranslation = generateMovementTranslation (Input.GetAxis ("Horizontal"));
+
+				//This is used to stop the user from using both direction to go fasther then just a single direction
+				if (verticalTranslation != 0 && horizontalTranslation != 0) {
+						horizontalTranslation *= .75f;
+						verticalTranslation *= .75f;
+				}
+		
+				//Actually Moves the character by the given translations.
+				transform.Translate (horizontalTranslation, verticalTranslation, 0);
 		}
 
 		/**
